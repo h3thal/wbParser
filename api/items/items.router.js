@@ -1,5 +1,5 @@
 import exporess from "express";
-import { getItems } from "./items.controller";
+import { getItems } from "./items.controller.js";
 
 const router = exporess.Router();
 
