@@ -29,7 +29,7 @@ export const getItems = async (req, res) => {
 
 		var config = {
 			method: "get",
-			url: `https://card.wb.ru/cards/v1/detail?appType=1&curr=rub&dest=-2133463&spp=27&nm=${extractedLinks.reduce(
+			url: `https://card.wb.ru/cards/v1/detail?appType=1&curr=rub&dest=-2133465&spp=27&nm=${extractedLinks.reduce(
 				(acc, item) => (acc += item + ";")
 			)}`,
 			headers: {},
@@ -48,7 +48,10 @@ export const getItems = async (req, res) => {
 					tempObg["stock"] = item.sizes.map((size) => {
 						let stock =
 							size.stocks.length > 0
-								? size.stocks.reduce((acc, el) => acc + +el.qty, 0)
+								? size.stocks.reduce(
+										(acc, el) => (el.wh === 117986 ? acc + +el.qty : acc),
+										0
+								  )
 								: 0;
 						return {
 							[size.origName]: stock,
